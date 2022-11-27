@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+.calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 400px;
+    height: 560px;
+    background-color: rgb(189, 189, 189);
+}
+.screen {
+    margin-top: 25px;
+    width: 350px;
+    height: 120px;
+    background-color: grey;
+}
+
+.buttons {
+    width: 380px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 15px;
+}
+.buttons > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 60px;
+    font-size: 30px;
+    background-color: rgb(143, 137, 137);
+    
+}
