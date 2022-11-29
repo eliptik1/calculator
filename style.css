@@ -13,10 +13,14 @@
     background-color: rgb(189, 189, 189);
 }
 .screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 25px;
     width: 350px;
     height: 120px;
     background-color: grey;
+    font-size: 50px;
 }
 
 .buttons {
