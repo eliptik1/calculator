@@ -14,7 +14,7 @@
 }
 .screen {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 25px;
     width: 350px;
@@ -32,12 +32,16 @@
     gap: 15px;
 }
 .buttons > div {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 75px;
     height: 60px;
     font-size: 30px;
-    background-color: rgb(143, 137, 137);
-    
+    background-color:rgb(143, 137, 137);
+}
+
+.buttons > div:hover {
+    background-color:rgb(114, 108, 108) ;
 }
