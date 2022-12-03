@@ -56,103 +56,91 @@ const btnAC = document.querySelector("#btnAC")
 const btnEquals = document.querySelector("#btnEquals")
 const btnAdd = document.querySelector("#btnAdd")
 
-let displayValue = display.textContent // ""
+let displayValue = display.textContent 
 let operator = ""
-//let values = []
-//let result = []
+
 let number1 = null
 let number2 = null
 let result = null
 
-let firstActive = true
-let secondActive = false
-let thirdActive = false
 
 let override = false
 let isCalculated = false
 
 btnAdd.addEventListener("click", () => {
     operator = "+"
-
-    if (firstActive && displayValue != "") {
-        number1 = Number(displayValue)
-
-        resultDisplay.textContent = number1 + " + "
-        //display.textContent = ""
-        displayValue = ""
-        console.log("number1: " + number1)
-        console.log("number2: " + number2)
-        console.log("operator: " + operator)
-        console.log("result: " + result)
-        firstActive = false
-        secondActive = true
-        override = true
-    }
-    else if (secondActive && displayValue != "") {
-        number2 = Number(displayValue)
-        //display.textContent = ""
-        displayValue = ""
-        operate(number1, operator, number2)
-        resultDisplay.textContent += " + "
-        console.log("number1: " + number1)
-        console.log("number2: " + number2)
-        secondActive = false
-        thirdActive = true
-        override = true
-    }
-    else if (thirdActive && displayValue != "") {
+    
+     if(isCalculated && displayValue == ""){
         number1 = result
-        number2 = Number(displayValue)
-        displayValue = ""
         operate(number1, operator, number2)
         resultDisplay.textContent = result + " + "
+        console.log("11111")
+        isCalculated = false
+    } 
+    else if (isCalculated && displayValue != ""){
+        number1 = result
+        number2 = Number(displayValue)
+        operate(number1, operator, number2)
+        resultDisplay.textContent = result + " + "
+        number2 = null
+        displayValue = ""
         override = true
+        console.log("222222")
     }
-
-
-    /* if(values.length < 2 && displayValue != ""){
-    operator = "+"
-    values.push(Number(displayValue))
-    display.textContent = ""
+    else if (number1 == null && isCalculated == false) {
+        number1 = Number(displayValue)
+        resultDisplay.textContent = number1 + " + "
+        displayValue = ""
+        console.log("number1: " + number1)
+        console.log("number2: " + number2)
+        //console.log("operator: " + operator)
+        console.log("result: " + result)
+        override = true
+        console.log("333333")
+        
+    } else if(number2 == null && displayValue != ""){
+        number2 = Number(displayValue)
+        operate(number1, operator, number2)
+        resultDisplay.textContent = result + " + "
+        number1 = result
+        displayValue = ""
+        override = true
+        console.log("444444")
+        isCalculated = false
+   }
+   else if (!isCalculated && displayValue != ""){
+    number2 = Number(displayValue)
+    operate(number1, operator, number2)
+    resultDisplay.textContent = result + " + "
+    number1 = result
     displayValue = ""
-    console.log(values)
-    } else if(values.length == 2){
-        operate(values[0],operator,values[1])
-        console.log(values)
-        values = []   
-    } */
-
+    override = true
+    console.log("5555555")
+    isCalculated = false
+}
 })
 
 btnEquals.addEventListener("click", () => {
-    if (secondActive && displayValue != "") {
-        /* values.push(Number(displayValue))
-        operate(values[0],operator,values[1])
-        console.log(values)
-        values = []   */
+    if (!isCalculated && displayValue != "") {
         number2 = Number(displayValue)
-        //display.textContent = ""
-
         operate(number1, operator, number2)
-        //number2 = result
-        //displayValue = "";
         display.textContent = result
-        firstActive = false
-        secondActive = false
-        thirdActive = true
-
-        override = true
-    }
-    else if (thirdActive && displayValue != "") {
-        operate(number1, operator, number2)
-        resultDisplay.textContent = operate(number1, operator, number2)
-        displayValue = ""
+        number1 = null
         number2 = null
         override = true
-        firstActive = true
-        secondActive = false
-        thirdActive = false
-    }
+        displayValue = ""
+        isCalculated = true
+        console.log("CALCULATED")
+    } /* else if (isCalculated && displayValue != ""){
+        number1 = result
+        number2 = Number(displayValue)
+        operate(number1, operator, number2)
+        resultDisplay.textContent = result + " + "
+        number2 = null
+        displayValue = ""
+        override = true
+        console.log("222222")
+    } */
 })
 
 btn9.addEventListener("click", () => {
@@ -162,10 +150,12 @@ btn9.addEventListener("click", () => {
         display.textContent += 9
         displayValue += "9"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 9
         displayValue += "9"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -176,10 +166,12 @@ btn8.addEventListener("click", () => {
         display.textContent += 8
         displayValue += "8"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 8
         displayValue += "8"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -190,10 +182,12 @@ btn7.addEventListener("click", () => {
         display.textContent += 7
         displayValue += "7"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 7
         displayValue += "7"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -204,10 +198,12 @@ btn6.addEventListener("click", () => {
         display.textContent += 6
         displayValue += "6"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 6
         displayValue += "6"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -218,10 +214,12 @@ btn5.addEventListener("click", () => {
         display.textContent += 5
         displayValue += "5"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 5
         displayValue += "5"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -232,10 +230,12 @@ btn4.addEventListener("click", () => {
         display.textContent += 4
         displayValue += "4"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 4
         displayValue += "4"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -246,10 +246,12 @@ btn3.addEventListener("click", () => {
         display.textContent += 3
         displayValue += "3"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 3
         displayValue += "3"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -260,10 +262,12 @@ btn2.addEventListener("click", () => {
         display.textContent += 2
         displayValue += "2"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 2
         displayValue += "2"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -274,10 +278,12 @@ btn1.addEventListener("click", () => {
         display.textContent += 1
         displayValue += "1"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 1
         displayValue += "1"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
@@ -288,10 +294,12 @@ btn0.addEventListener("click", () => {
         display.textContent += 0
         displayValue += "0"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     } else {
         display.textContent += 0
         displayValue += "0"
         console.log("displayValue:" + displayValue)
+        isCalculated = false
     }
 })
 
