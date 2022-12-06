@@ -16,10 +16,19 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    width: 350px;
+    height: 80px;
+    background-color: grey;
+    font-size: 50px;
+}
+.result {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     margin-top: 25px;
     width: 350px;
-    height: 120px;
-    background-color: grey;
+    height: 60px;
+    background-color: rgb(101, 158, 90);
     font-size: 50px;
 }
 
