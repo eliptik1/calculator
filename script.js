@@ -56,7 +56,7 @@ const btnAC = document.querySelector("#btnAC")
 const btnEquals = document.querySelector("#btnEquals")
 const btnAdd = document.querySelector("#btnAdd")
 
-let displayValue = display.textContent 
+let displayValue = display.textContent
 let operator = ""
 
 let number1 = null
@@ -69,15 +69,19 @@ let isCalculated = false
 
 btnAdd.addEventListener("click", () => {
     operator = "+"
-    
-     if(isCalculated && displayValue == ""){
+    operation("+")
+})
+
+function operation(operator) {
+
+    if (isCalculated && displayValue == "") {
         number1 = result
         operate(number1, operator, number2)
         resultDisplay.textContent = result + " + "
         console.log("11111")
         isCalculated = false
-    } 
-    else if (isCalculated && displayValue != ""){
+    }
+    else if (isCalculated && displayValue != "") {
         number1 = result
         number2 = Number(displayValue)
         operate(number1, operator, number2)
@@ -97,8 +101,8 @@ btnAdd.addEventListener("click", () => {
         console.log("result: " + result)
         override = true
         console.log("333333")
-        
-    } else if(number2 == null && displayValue != ""){
+    }
+    else if (number2 == null && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + " + "
@@ -107,18 +111,19 @@ btnAdd.addEventListener("click", () => {
         override = true
         console.log("444444")
         isCalculated = false
-   }
-   else if (!isCalculated && displayValue != ""){
-    number2 = Number(displayValue)
-    operate(number1, operator, number2)
-    resultDisplay.textContent = result + " + "
-    number1 = result
-    displayValue = ""
-    override = true
-    console.log("5555555")
-    isCalculated = false
+    }
+    else if (!isCalculated && displayValue != "") {
+        number2 = Number(displayValue)
+        operate(number1, operator, number2)
+        resultDisplay.textContent = result + " + "
+        number1 = result
+        displayValue = ""
+        override = true
+        console.log("5555555")
+        isCalculated = false
+    }
 }
-})
+
 
 btnEquals.addEventListener("click", () => {
     if (!isCalculated && displayValue != "") {
