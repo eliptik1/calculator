@@ -7,27 +7,27 @@ function add(a, b) {
 }
 
 function subtrack(a, b) {
-     result = Number(a) - Number(b)
-     resultDisplay.textContent = result
-     console.log("number1: " + number1)
-     console.log("number2: " + number2)
-     console.log("result: " + result)
+    result = Number(a) - Number(b)
+    resultDisplay.textContent = result
+    console.log("number1: " + number1)
+    console.log("number2: " + number2)
+    console.log("result: " + result)
 }
 
 function multiply(a, b) {
     result = Number(a) * Number(b)
-     resultDisplay.textContent = result
-     console.log("number1: " + number1)
-     console.log("number2: " + number2)
-     console.log("result: " + result)
+    resultDisplay.textContent = result
+    console.log("number1: " + number1)
+    console.log("number2: " + number2)
+    console.log("result: " + result)
 }
 
 function divide(a, b) {
     result = Number(a) / Number(b)
-     resultDisplay.textContent = result
-     console.log("number1: " + number1)
-     console.log("number2: " + number2)
-     console.log("result: " + result)
+    resultDisplay.textContent = result
+    console.log("number1: " + number1)
+    console.log("number2: " + number2)
+    console.log("result: " + result)
 }
 
 function operate(a, operator, b) {
@@ -69,7 +69,10 @@ const btnDivide = document.querySelector("#btnDivide")
 
 
 let displayValue = display.textContent
-let operator = ""
+
+let previousOperator = ""
+let nextOperator = ""
+let chosenOperator =""
 
 let number1 = null
 let number2 = null
@@ -78,76 +81,102 @@ let result = null
 
 let override = false
 let isCalculated = false
+let midCalculated = false
 
 btnAdd.addEventListener("click", () => {
-    operator = "+"
-    operation("+")
-})
+    chosenOperator = "+"
+    if (midCalculated == false) { 
+        operation(previousOperator)
+    } else if(midCalculated == true) {
+        operation(nextOperator)
+    }
+} 
+)
 
 btnSubtrack.addEventListener("click", () => {
-    operator = "-"
-    operation("-")
+    chosenOperator = "-"
+    if (midCalculated == false) {
+        operation(previousOperator)
+    } else if(midCalculated == true ) {
+        operation(nextOperator)
+    }
 })
 
-/* btnMultiply.addEventListener("click", () => {
-    operator = "*"
-    operation("*")
+btnMultiply.addEventListener("click", () => {
+    chosenOperator = "*"
+    if (midCalculated == false) {
+        operation(previousOperator)
+    } else if(midCalculated == true) {
+        operation(nextOperator)
+    }
 })
 
 btnDivide.addEventListener("click", () => {
-    operator = "/"
-    operation("/")
-}) */
+    chosenOperator = "/"
+    if (midCalculated == false) {
+        operation(previousOperator)
+    } else if(midCalculated == true) {
+        operation(nextOperator)
+    }
+})
 
 function operation(operator) {
 
     if (isCalculated && displayValue == "") {
         number1 = result
-        operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${operator} `
+        resultDisplay.textContent = result + ` ${chosenOperator} `
         console.log("11111")
         isCalculated = false
+        midCalculated = true
+        nextOperator = chosenOperator
     }
     else if (isCalculated && displayValue != "") {
         number1 = result
         number2 = Number(displayValue)
         operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${operator} `
+        resultDisplay.textContent = result + ` ${chosenOperator} `
         number2 = null
         displayValue = ""
         override = true
         console.log("222222")
+        midCalculated = true
+        nextOperator = chosenOperator
     }
     else if (number1 == null && isCalculated == false) {
         number1 = Number(displayValue)
-        resultDisplay.textContent = number1 + ` ${operator} `
+        resultDisplay.textContent = number1 + ` ${chosenOperator} `
         displayValue = ""
         console.log("number1: " + number1)
         console.log("number2: " + number2)
-        //console.log("operator: " + operator)
         console.log("result: " + result)
         override = true
         console.log("333333")
+        previousOperator = chosenOperator
+        nextOperator = chosenOperator
     }
     else if (number2 == null && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${operator} `
+        resultDisplay.textContent = result + ` ${chosenOperator} `
         number1 = result
         displayValue = ""
         override = true
         console.log("444444")
         isCalculated = false
+        midCalculated = true
+        nextOperator = chosenOperator  
     }
     else if (!isCalculated && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${operator} `
+        resultDisplay.textContent = result + ` ${chosenOperator} `
         number1 = result
         displayValue = ""
         override = true
         console.log("5555555")
         isCalculated = false
+        midCalculated = true
+        nextOperator = chosenOperator
     }
 }
 
@@ -155,13 +184,15 @@ function operation(operator) {
 btnEquals.addEventListener("click", () => {
     if (!isCalculated && displayValue != "") {
         number2 = Number(displayValue)
-        operate(number1, operator, number2)
+        operate(number1, chosenOperator, number2)
         display.textContent = result
         number1 = null
         number2 = null
         override = true
         displayValue = ""
         isCalculated = true
+        midCalculated = false
+
         console.log("CALCULATED")
     } /* else if (isCalculated && displayValue != ""){
         number1 = result
