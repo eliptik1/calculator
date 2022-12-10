@@ -15,7 +15,7 @@ function subtrack(a, b) {
 }
 
 function multiply(a, b) {
-    result = Number(a) * Number(b)
+    result = Math.round((Number(a) * Number(b))*10000)/10000
     resultDisplay.textContent = result
     console.log("number1: " + number1)
     console.log("number2: " + number2)
@@ -23,7 +23,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    result = Number(a) / Number(b)
+    result = Math.round((Number(a) / Number(b))*10000)/10000
     resultDisplay.textContent = result
     console.log("number1: " + number1)
     console.log("number2: " + number2)
@@ -72,7 +72,7 @@ let displayValue = display.textContent
 
 let previousOperator = ""
 let nextOperator = ""
-let chosenOperator =""
+let chosenOperator = ""
 
 let number1 = null
 let number2 = null
@@ -85,19 +85,19 @@ let midCalculated = false
 
 btnAdd.addEventListener("click", () => {
     chosenOperator = "+"
-    if (midCalculated == false) { 
+    if (midCalculated == false) {
         operation(previousOperator)
-    } else if(midCalculated == true) {
+    } else if (midCalculated == true) {
         operation(nextOperator)
     }
-} 
+}
 )
 
 btnSubtrack.addEventListener("click", () => {
     chosenOperator = "-"
     if (midCalculated == false) {
         operation(previousOperator)
-    } else if(midCalculated == true ) {
+    } else if (midCalculated == true) {
         operation(nextOperator)
     }
 })
@@ -106,7 +106,7 @@ btnMultiply.addEventListener("click", () => {
     chosenOperator = "*"
     if (midCalculated == false) {
         operation(previousOperator)
-    } else if(midCalculated == true) {
+    } else if (midCalculated == true) {
         operation(nextOperator)
     }
 })
@@ -115,13 +115,13 @@ btnDivide.addEventListener("click", () => {
     chosenOperator = "/"
     if (midCalculated == false) {
         operation(previousOperator)
-    } else if(midCalculated == true) {
+    } else if (midCalculated == true) {
         operation(nextOperator)
     }
 })
 
 function operation(operator) {
-    
+
     //Starting a new calculation:
     if (number1 == null && isCalculated == false) {
         number1 = Number(displayValue)
@@ -146,7 +146,7 @@ function operation(operator) {
         console.log("222222")
         isCalculated = false
         midCalculated = true
-        nextOperator = chosenOperator  
+        nextOperator = chosenOperator
     }
     // Continue to next calculations using an operator without pressing the equals button:
     else if (!isCalculated && displayValue != "") {
