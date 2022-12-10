@@ -121,28 +121,9 @@ btnDivide.addEventListener("click", () => {
 })
 
 function operation(operator) {
-
-    if (isCalculated && displayValue == "") {
-        number1 = result
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        console.log("11111")
-        isCalculated = false
-        midCalculated = true
-        nextOperator = chosenOperator
-    }
-    else if (isCalculated && displayValue != "") {
-        number1 = result
-        number2 = Number(displayValue)
-        operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        number2 = null
-        displayValue = ""
-        override = true
-        console.log("222222")
-        midCalculated = true
-        nextOperator = chosenOperator
-    }
-    else if (number1 == null && isCalculated == false) {
+    
+    //Starting a new calculation:
+    if (number1 == null && isCalculated == false) {
         number1 = Number(displayValue)
         resultDisplay.textContent = number1 + ` ${chosenOperator} `
         displayValue = ""
@@ -150,10 +131,11 @@ function operation(operator) {
         console.log("number2: " + number2)
         console.log("result: " + result)
         override = true
-        console.log("333333")
+        console.log("111111")
         previousOperator = chosenOperator
         nextOperator = chosenOperator
     }
+    // Do the next calculation using an operator without pressing the equals button:
     else if (number2 == null && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
@@ -161,11 +143,12 @@ function operation(operator) {
         number1 = result
         displayValue = ""
         override = true
-        console.log("444444")
+        console.log("222222")
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator  
     }
+    // Continue to next calculations using an operator without pressing the equals button:
     else if (!isCalculated && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
@@ -173,7 +156,16 @@ function operation(operator) {
         number1 = result
         displayValue = ""
         override = true
-        console.log("5555555")
+        console.log("333333")
+        isCalculated = false
+        midCalculated = true
+        nextOperator = chosenOperator
+    }
+    // If you calculated & got the result and want to use the result for next calculations:
+    else if (isCalculated && displayValue == "") {
+        number1 = result
+        resultDisplay.textContent = result + ` ${chosenOperator} `
+        console.log("444444")
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -192,18 +184,8 @@ btnEquals.addEventListener("click", () => {
         displayValue = ""
         isCalculated = true
         midCalculated = false
-
         console.log("CALCULATED")
-    } /* else if (isCalculated && displayValue != ""){
-        number1 = result
-        number2 = Number(displayValue)
-        operate(number1, operator, number2)
-        resultDisplay.textContent = result + " + "
-        number2 = null
-        displayValue = ""
-        override = true
-        console.log("222222")
-    } */
+    }
 })
 
 btn9.addEventListener("click", () => {
