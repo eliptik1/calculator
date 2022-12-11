@@ -1,5 +1,5 @@
 function add(a, b) {
-    result = Number(a) + Number(b)
+    result = Math.round((Number(a) + Number(b))*10000)/10000
     resultDisplay.textContent = result
     console.log("number1: " + number1)
     console.log("number2: " + number2)
@@ -7,7 +7,7 @@ function add(a, b) {
 }
 
 function subtrack(a, b) {
-    result = Number(a) - Number(b)
+    result = Math.round((Number(a) - Number(b))*10000)/10000
     resultDisplay.textContent = result
     console.log("number1: " + number1)
     console.log("number2: " + number2)
@@ -184,6 +184,7 @@ btnEquals.addEventListener("click", () => {
         displayValue = ""
         isCalculated = true
         midCalculated = false
+        chosenOperator = "+"
         console.log("CALCULATED")
     }
 })
@@ -350,7 +351,10 @@ btn0.addEventListener("click", () => {
 
 
 btnAC.addEventListener("click", () => {
+    resultDisplay.textContent = ""
     display.textContent = ""
     displayValue = ""
+    number1 = null
+    number2 = null
 })
 
