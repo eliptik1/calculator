@@ -184,6 +184,8 @@ btnEquals.addEventListener("click", () => {
         displayValue = ""
         isCalculated = true
         midCalculated = false
+        previousOperator = ""
+        nextOperator = ""
         chosenOperator = "+"
         console.log("CALCULATED")
     }
@@ -356,5 +358,12 @@ btnAC.addEventListener("click", () => {
     displayValue = ""
     number1 = null
     number2 = null
+    result = null
+    override = false
+    isCalculated = false
+    midCalculated = false
+    previousOperator = ""
+    nextOperator = ""
+    chosenOperator = "+"
 })
 
