@@ -85,7 +85,8 @@ let midCalculated = false
 
 btnAdd.addEventListener("click", () => {
     chosenOperator = "+"
-    if (midCalculated == false) {
+    resultDisplay.textContent = number1 + ` ${chosenOperator} `
+    if (midCalculated == false) { 
         operation(previousOperator)
     } else if (midCalculated == true) {
         operation(nextOperator)
@@ -95,7 +96,8 @@ btnAdd.addEventListener("click", () => {
 
 btnSubtrack.addEventListener("click", () => {
     chosenOperator = "-"
-    if (midCalculated == false) {
+    resultDisplay.textContent = number1 + ` ${chosenOperator} `
+    if (midCalculated == false) { 
         operation(previousOperator)
     } else if (midCalculated == true) {
         operation(nextOperator)
@@ -104,15 +106,17 @@ btnSubtrack.addEventListener("click", () => {
 
 btnMultiply.addEventListener("click", () => {
     chosenOperator = "*"
-    if (midCalculated == false) {
+    resultDisplay.textContent = number1 + ` ${chosenOperator} `
+    if (midCalculated == false) {   
         operation(previousOperator)
-    } else if (midCalculated == true) {
+    } else if (midCalculated == true) { 
         operation(nextOperator)
     }
 })
 
 btnDivide.addEventListener("click", () => {
     chosenOperator = "/"
+    resultDisplay.textContent = number1 + ` ${chosenOperator} `
     if (midCalculated == false) {
         operation(previousOperator)
     } else if (midCalculated == true) {
