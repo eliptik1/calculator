@@ -82,8 +82,9 @@ function decideOperation(e) {
     resultDisplay.textContent = number1 + ` ${chosenOperator} `;
     if (midCalculated == false && temp == chosenOperator) {
         console.log("A")
-        
+        temp = chosenOperator;
         operation(previousOperator);
+
     } else  if (midCalculated == false && temp != chosenOperator) {
         console.log("B")
         temp = chosenOperator;
@@ -117,16 +118,6 @@ function operation(operator) {
         temp = operator
         previousOperator = chosenOperator
         nextOperator = chosenOperator
-        
-        /* number2 = Number(displayValue)
-        operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        number1 = result
-        displayValue = ""
-        override = true
-        isCalculated = false
-        midCalculated = true
-        nextOperator = chosenOperator */
     }
     // Do the next calculation using an operator without pressing the equals button:
     else if (number2 == null && displayValue != "") {
@@ -146,12 +137,9 @@ function operation(operator) {
         temp = operator
         previousOperator = chosenOperator
         nextOperator = chosenOperator
-        
+    
         midCalculated = false
     }
-
-
-
     else if (number2 != null && displayValue != "") {
         console.log("3333333")
         number2 = Number(displayValue)
@@ -164,31 +152,6 @@ function operation(operator) {
         midCalculated = true
         nextOperator = chosenOperator
     }
-    /* else if (number2 == null && displayValue != "") {
-        console.log("aaaaaaaa33333333")
-        number2 = Number(displayValue)
-        operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        number1 = result
-        displayValue = ""
-        override = true
-        isCalculated = false
-        midCalculated = true
-        nextOperator = chosenOperator
-    }
-    // Continue to next calculations using an operator without pressing the equals button:
-    else if (!isCalculated && displayValue != "" && operatorSwitched == true) {
-        console.log("4444444")
-        number2 = Number(displayValue)
-        operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        number1 = result
-        displayValue = ""
-        override = true
-        isCalculated = false
-        midCalculated = true
-        nextOperator = chosenOperator
-    } */
     // If you calculated & got the result and want to use the result for next calculations:
     else if (isCalculated && displayValue == "") {
         console.log("5555555")
