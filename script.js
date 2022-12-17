@@ -14,8 +14,14 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    result = Math.round((Number(a) / Number(b)) * 10000) / 10000
-    resultDisplay.textContent = result
+    if(b == "0"){
+        result = "Undefined"
+        resultDisplay.textContent = "Undefined :)"
+        display.textContent = ":)"
+    } else {
+        result = Math.round((Number(a) / Number(b)) * 10000) / 10000
+        resultDisplay.textContent = result
+    }
 }
 
 function operate(a, operator, b) {
@@ -167,7 +173,9 @@ btnEquals.addEventListener("click", () => {
     if (!isCalculated && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, chosenOperator, number2)
-        display.textContent = result
+        if(result != "Undefined"){
+            display.textContent = result
+        }
         number1 = null
         number2 = null
         override = true
