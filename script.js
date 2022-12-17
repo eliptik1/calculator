@@ -60,6 +60,7 @@ const btnAdd = document.querySelector("#btnAdd")
 const btnSubtrack = document.querySelector("#btnSubtrack")
 const btnMultiply = document.querySelector("#btnMultiply")
 const btnDivide = document.querySelector("#btnDivide")
+const btnDot = document.querySelector("#btnDot")
 
 let displayValue = display.textContent
 
@@ -78,12 +79,15 @@ let midCalculated = false
 
 let temp = ""
 
+let decimalEnabled= true
+
 btnAdd.addEventListener("click", decideOperation)
 btnSubtrack.addEventListener("click", decideOperation)
 btnMultiply.addEventListener("click", decideOperation)
 btnDivide.addEventListener("click", decideOperation)
 
 function decideOperation(e) {
+    decimalEnabled = true
     chosenOperator = e.target.textContent
     resultDisplay.textContent = number1 + ` ${chosenOperator} `;
     if (midCalculated == false && temp == chosenOperator) {
@@ -185,16 +189,25 @@ btnEquals.addEventListener("click", () => {
         previousOperator = ""
         nextOperator = ""
         chosenOperator = "+"
+        decimalEnabled = true
     }
 })
 
 function decideNumber(e) {
-    if (override) {
+    
+    if (override && decimalEnabled) {
         display.textContent = ""  // Clear the display screen
         override = false
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
         isCalculated = false
+    } else if(override && !decimalEnabled){
+        override = false
+        display.textContent = ""
+        display.textContent += "0."
+        display.textContent += e.target.textContent
+        displayValue += e.target.textContent
+        decimalEnabled = false
     } else {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
@@ -213,6 +226,24 @@ btn2.addEventListener("click", decideNumber)
 btn1.addEventListener("click", decideNumber)
 btn0.addEventListener("click", decideNumber)
 
+btnDot.addEventListener("click",()=> {
+    
+    if(override){
+        display.textContent = ""
+        display.textContent += "0."
+        displayValue += "."
+        decimalEnabled = false
+    } else if(decimalEnabled && number1 != null){
+        display.textContent += "."
+        displayValue += "."
+        decimalEnabled = false
+    } else if(decimalEnabled && number1 == null){
+        display.textContent = "0."
+        displayValue = "0."
+        decimalEnabled = false
+    } 
+})
+
 
 btnAC.addEventListener("click", () => {
     resultDisplay.textContent = ""
@@ -224,6 +255,7 @@ btnAC.addEventListener("click", () => {
     override = false
     isCalculated = false
     midCalculated = false
+    decimalEnabled = true
     previousOperator = ""
     nextOperator = ""
     chosenOperator = "+"
