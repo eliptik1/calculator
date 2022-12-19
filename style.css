@@ -20,6 +20,7 @@
     height: 80px;
     background-color: grey;
     font-size: 50px;
+    overflow: hidden
 }
 .result {
     display: flex;
@@ -30,6 +31,7 @@
     height: 60px;
     background-color: rgb(101, 158, 90);
     font-size: 50px;
+    overflow: hidden
 }
 
 .buttons {
