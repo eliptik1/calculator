@@ -81,7 +81,8 @@ let isCalculated = false
 let midCalculated = false
 
 let decimalEnabled = true
-delEnabled = false
+let delEnabled = false
+let operatorClicked = false
 
 btnAdd.addEventListener("click", decideOperation)
 btnSubtrack.addEventListener("click", decideOperation)
@@ -89,20 +90,17 @@ btnMultiply.addEventListener("click", decideOperation)
 btnDivide.addEventListener("click", decideOperation)
 
 function decideOperation(e) {
+    operatorClicked = true
     decimalEnabled = true
     delEnabled = false
     override = true
     chosenOperator = e.target.textContent
     resultDisplay.textContent = number1 + ` ${chosenOperator} `;
-    if (midCalculated == false && temp == chosenOperator) {
+    if (midCalculated == false) {
         //console.log("A")
         temp = chosenOperator;
         operation(previousOperator);
-    } else if (midCalculated == false && temp != chosenOperator) {
-        //console.log("B")
-        temp = chosenOperator;
-        operation(previousOperator);
-    }
+    } 
     else if (midCalculated == true && temp == chosenOperator) {
         //console.log("C")
         operation(temp);
@@ -167,6 +165,16 @@ function operation(operator) {
     // If you calculated & got the result and want to use the result for next calculations:
     else if (isCalculated && displayValue == "") {
         //console.log("5555555")
+        displayValue = ""
+        number1 = result
+        resultDisplay.textContent = result + ` ${chosenOperator} `
+        isCalculated = false
+        midCalculated = true
+        nextOperator = chosenOperator
+    }
+    // If you calculated & used delete btn and want to use the new number that's on the display for next calculations:
+    else if (isCalculated && displayValue != "") {
+        displayValue = ""
         number1 = result
         resultDisplay.textContent = result + ` ${chosenOperator} `
         isCalculated = false
@@ -179,45 +187,33 @@ btnEquals.addEventListener("click", () => {
     if (!isCalculated && displayValue != "" && !delEnabled) {
         number2 = Number(displayValue)
         operate(number1, chosenOperator, number2)
-        if (result != "Undefined") {
-            display.textContent = result
-        }
-        number1 = null
-        number2 = null
+        if (result != "Undefined") {display.textContent = result}
         override = true
-        displayValue = ""
-        isCalculated = true
-        midCalculated = false
-        previousOperator = ""
-        nextOperator = ""
-        chosenOperator = "+"
-        decimalEnabled = true
     } else if (!isCalculated && displayValue != "" && delEnabled) {
         number2 = Number(displayValue)
         operate(number1, chosenOperator, number2)
-        if (result != "Undefined") {
-            display.textContent = result
-        }
-        number1 = null
-        number2 = null
-        displayValue = ""
-        isCalculated = true
-        midCalculated = false
-        previousOperator = ""
-        nextOperator = ""
-        chosenOperator = "+"
-        decimalEnabled = true
+        if (result != "Undefined") {display.textContent = result}
+        delEnabled = false
     }
+    number1 = null
+    number2 = null
+    displayValue = ""
+    isCalculated = true
+    midCalculated = false
+    previousOperator = ""
+    nextOperator = ""
+    chosenOperator = "+"
+    decimalEnabled = true
 })
 
 function decideNumber(e) {
-
     if (override && decimalEnabled) {
         display.textContent = ""  // Clear the display screen
         override = false
         display.textContent += e.target.textContent
-        displayValue += e.target.textContent
+        displayValue += e.target.textContent    
         isCalculated = false
+        
         console.log("A")
     } else if (override && !decimalEnabled) {
         override = false
@@ -231,6 +227,9 @@ function decideNumber(e) {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
         isCalculated = false
+
+        console.log("okay1")
+        
         console.log("C")
     }
 }
@@ -286,11 +285,22 @@ btnAC.addEventListener("click", () => {
 })
 
 btnDel.addEventListener("click", () => {
-    override = false
-    delEnabled = true
-    display.textContent = display.textContent.slice(0, -1)
-    displayValue = displayValue.slice(0, -1)
-    if (result != null) {
-        result = result.toString().slice(0, -1)
+    if (!delEnabled && number1 != null && displayValue == "") { // when you press the del btn before entering the second number
+        display.textContent = "0"
+        displayValue = "0"
+    } else {
+        override = false
+        delEnabled = true
+        display.textContent = display.textContent.slice(0, -1)
+        displayValue = displayValue.slice(0, -1)
+        if(isCalculated){
+            displayValue = result.toString().slice(0, -1) + displayValue.slice(0, -1)
+        }
+        
+
+        if (result != null) {
+            result = result.toString().slice(0, -1)
+        }
     }
+
 })
