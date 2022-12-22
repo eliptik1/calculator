@@ -23,6 +23,10 @@ function divide(a, b) {
         resultDisplay.textContent = result
     }
 }
+function power(a, b) {
+    result = Math.round((Number(a) ** Number(b)) * 10000) / 10000
+    resultDisplay.textContent = result
+}
 
 function operate(a, operator, b) {
     switch (operator) {
@@ -37,6 +41,9 @@ function operate(a, operator, b) {
             break;
         case "/":
             return divide(a, b)
+            break;
+        case "**":
+            return power(a, b)
             break;
     }
 }
@@ -62,7 +69,7 @@ const btnMultiply = document.querySelector("#btnMultiply")
 const btnDivide = document.querySelector("#btnDivide")
 const btnDot = document.querySelector("#btnDot")
 const btnDel = document.querySelector("#btnDel")
-
+const btnPw = document.querySelector("#btnPw")
 
 
 let displayValue = display.textContent
@@ -88,14 +95,21 @@ btnAdd.addEventListener("click", decideOperation)
 btnSubtrack.addEventListener("click", decideOperation)
 btnMultiply.addEventListener("click", decideOperation)
 btnDivide.addEventListener("click", decideOperation)
+btnPw.addEventListener("click", decideOperation)
 
 function decideOperation(e) {
     operatorClicked = true
     decimalEnabled = true
     delEnabled = false
     override = true
-    chosenOperator = e.target.textContent
-    resultDisplay.textContent = number1 + ` ${chosenOperator} `;
+    if(e.target.textContent == "^"){ // If you click the btnPW, use its data-text "**" as an operator, but display its text content "^" on the screen.
+        chosenOperator = e.target.getAttribute("data-text")
+        resultDisplay.textContent = number1 + ` ^ `;
+    } else {
+        chosenOperator = e.target.textContent
+        resultDisplay.textContent = number1 + ` ${chosenOperator} `;
+    }
+    
     if (midCalculated == false) {
         //console.log("A")
         temp = chosenOperator;
@@ -117,6 +131,9 @@ function operation(operator) {
         //console.log("11111111")
         number1 = Number(displayValue)
         resultDisplay.textContent = number1 + ` ${chosenOperator} `
+        if(chosenOperator == "**"){
+            resultDisplay.textContent = number1 + ` ^ `
+        }
         displayValue = ""
         override = true
         previousOperator = chosenOperator
@@ -135,6 +152,9 @@ function operation(operator) {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + ` ${chosenOperator} `
+        if(chosenOperator == "**"){
+            resultDisplay.textContent = result + ` ^ `
+        }
         number1 = result
         displayValue = ""
         override = true
@@ -147,7 +167,6 @@ function operation(operator) {
         temp = operator
         previousOperator = chosenOperator
         nextOperator = chosenOperator
-
         midCalculated = false
     }
     else if (number2 != null && displayValue != "") {
@@ -155,6 +174,9 @@ function operation(operator) {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + ` ${chosenOperator} `
+        if(chosenOperator == "**"){
+            resultDisplay.textContent = result + ` ^ `
+        }
         number1 = result
         displayValue = ""
         override = true
@@ -168,6 +190,9 @@ function operation(operator) {
         displayValue = ""
         number1 = result
         resultDisplay.textContent = result + ` ${chosenOperator} `
+        if(chosenOperator == "**"){
+            resultDisplay.textContent = result + ` ^ `
+        }
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -177,6 +202,9 @@ function operation(operator) {
         displayValue = ""
         number1 = result
         resultDisplay.textContent = result + ` ${chosenOperator} `
+        if(chosenOperator == "**"){
+            resultDisplay.textContent = result + ` ^ `
+        }
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -213,7 +241,6 @@ function decideNumber(e) {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent    
         isCalculated = false
-        
         console.log("A")
     } else if (override && !decimalEnabled) {
         override = false
@@ -226,10 +253,7 @@ function decideNumber(e) {
     } else {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
-        isCalculated = false
-
-        console.log("okay1")
-        
+        isCalculated = false     
         console.log("C")
     }
 }
@@ -296,8 +320,6 @@ btnDel.addEventListener("click", () => {
         if(isCalculated){
             displayValue = result.toString().slice(0, -1) + displayValue.slice(0, -1)
         }
-        
-
         if (result != null) {
             result = result.toString().slice(0, -1)
         }
