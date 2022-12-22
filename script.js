@@ -70,6 +70,8 @@ const btnDivide = document.querySelector("#btnDivide")
 const btnDot = document.querySelector("#btnDot")
 const btnDel = document.querySelector("#btnDel")
 const btnPw = document.querySelector("#btnPw")
+const btnSign = document.querySelector("#btnSign")
+
 
 
 let displayValue = display.textContent
@@ -89,7 +91,7 @@ let midCalculated = false
 
 let decimalEnabled = true
 let delEnabled = false
-let operatorClicked = false
+let signChanged = false
 
 btnAdd.addEventListener("click", decideOperation)
 btnSubtrack.addEventListener("click", decideOperation)
@@ -98,23 +100,22 @@ btnDivide.addEventListener("click", decideOperation)
 btnPw.addEventListener("click", decideOperation)
 
 function decideOperation(e) {
-    operatorClicked = true
     decimalEnabled = true
     delEnabled = false
     override = true
-    if(e.target.textContent == "^"){ // If you click the btnPW, use its data-text "**" as an operator, but display its text content "^" on the screen.
+    if (e.target.textContent == "^") { // If you click the btnPW, use its data-text "**" as an operator, but display its text content "^" on the screen.
         chosenOperator = e.target.getAttribute("data-text")
         resultDisplay.textContent = number1 + ` ^ `;
     } else {
         chosenOperator = e.target.textContent
         resultDisplay.textContent = number1 + ` ${chosenOperator} `;
     }
-    
+
     if (midCalculated == false) {
         //console.log("A")
         temp = chosenOperator;
         operation(previousOperator);
-    } 
+    }
     else if (midCalculated == true && temp == chosenOperator) {
         //console.log("C")
         operation(temp);
@@ -131,7 +132,7 @@ function operation(operator) {
         //console.log("11111111")
         number1 = Number(displayValue)
         resultDisplay.textContent = number1 + ` ${chosenOperator} `
-        if(chosenOperator == "**"){
+        if (chosenOperator == "**") {
             resultDisplay.textContent = number1 + ` ^ `
         }
         displayValue = ""
@@ -152,7 +153,7 @@ function operation(operator) {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + ` ${chosenOperator} `
-        if(chosenOperator == "**"){
+        if (chosenOperator == "**") {
             resultDisplay.textContent = result + ` ^ `
         }
         number1 = result
@@ -174,7 +175,7 @@ function operation(operator) {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + ` ${chosenOperator} `
-        if(chosenOperator == "**"){
+        if (chosenOperator == "**") {
             resultDisplay.textContent = result + ` ^ `
         }
         number1 = result
@@ -190,7 +191,7 @@ function operation(operator) {
         displayValue = ""
         number1 = result
         resultDisplay.textContent = result + ` ${chosenOperator} `
-        if(chosenOperator == "**"){
+        if (chosenOperator == "**") {
             resultDisplay.textContent = result + ` ^ `
         }
         isCalculated = false
@@ -202,7 +203,7 @@ function operation(operator) {
         displayValue = ""
         number1 = result
         resultDisplay.textContent = result + ` ${chosenOperator} `
-        if(chosenOperator == "**"){
+        if (chosenOperator == "**") {
             resultDisplay.textContent = result + ` ^ `
         }
         isCalculated = false
@@ -215,12 +216,12 @@ btnEquals.addEventListener("click", () => {
     if (!isCalculated && displayValue != "" && !delEnabled) {
         number2 = Number(displayValue)
         operate(number1, chosenOperator, number2)
-        if (result != "Undefined") {display.textContent = result}
+        if (result != "Undefined") { display.textContent = result }
         override = true
     } else if (!isCalculated && displayValue != "" && delEnabled) {
         number2 = Number(displayValue)
         operate(number1, chosenOperator, number2)
-        if (result != "Undefined") {display.textContent = result}
+        if (result != "Undefined") { display.textContent = result }
         delEnabled = false
     }
     number1 = null
@@ -239,7 +240,7 @@ function decideNumber(e) {
         display.textContent = ""  // Clear the display screen
         override = false
         display.textContent += e.target.textContent
-        displayValue += e.target.textContent    
+        displayValue += e.target.textContent
         isCalculated = false
         console.log("A")
     } else if (override && !decimalEnabled) {
@@ -253,7 +254,7 @@ function decideNumber(e) {
     } else {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
-        isCalculated = false     
+        isCalculated = false
         console.log("C")
     }
 }
@@ -270,22 +271,22 @@ btn1.addEventListener("click", decideNumber)
 btn0.addEventListener("click", decideNumber)
 
 btnDot.addEventListener("click", () => {
-    if (decimalEnabled && override && !isCalculated) {
+    if (decimalEnabled && override && !isCalculated && !display.textContent.includes(".")) {
         display.textContent = ""
         display.textContent += "0."
         displayValue += "0."
         decimalEnabled = false
-    } else if (decimalEnabled && number1 != null) {
+    } else if (decimalEnabled && number1 != null && !display.textContent.includes(".")) {
         display.textContent += "."
         displayValue += "."
         decimalEnabled = false
-    } else if (decimalEnabled && number1 == null && displayValue == "") {
-        display.textContent = ""  // Clear the display screen
+    } else if (decimalEnabled && number1 == null && displayValue == "" && !display.textContent.includes(".")) {
+        display.textContent = ""
         override = false
         display.textContent = "0."
         displayValue = "0."
-        isCalculated = false
-    } else if (decimalEnabled && number1 == null && displayValue != "") {
+        decimalEnabled = false
+    } else if (decimalEnabled && number1 == null && displayValue != "" && !display.textContent.includes(".")) {
         display.textContent += "."
         displayValue += "."
         decimalEnabled = false
@@ -317,12 +318,26 @@ btnDel.addEventListener("click", () => {
         delEnabled = true
         display.textContent = display.textContent.slice(0, -1)
         displayValue = displayValue.slice(0, -1)
-        if(isCalculated){
+        if (isCalculated) {
             displayValue = result.toString().slice(0, -1) + displayValue.slice(0, -1)
         }
         if (result != null) {
             result = result.toString().slice(0, -1)
         }
     }
+})
 
+btnSign.addEventListener("click", () => {
+    if(display.textContent.includes(".")){
+        decimalEnabled = true
+    }
+    if (!signChanged && display.textContent != "") {
+        display.textContent = displayValue*(-1)
+        displayValue = displayValue*(-1)
+        signChanged = true  
+    } else if(signChanged && display.textContent != ""){
+        display.textContent = displayValue*(-1)
+        displayValue = displayValue*(-1)
+        signChanged = false   
+    }
 })
