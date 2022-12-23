@@ -112,15 +112,12 @@ function decideOperation(e) {
     }
 
     if (midCalculated == false) {
-        //console.log("A")
         temp = chosenOperator;
         operation(previousOperator);
     }
     else if (midCalculated == true && temp == chosenOperator) {
-        //console.log("C")
         operation(temp);
     } else if (midCalculated == true && temp != chosenOperator) {
-        //console.log("D")
         temp = chosenOperator;
         operation(nextOperator);
     }
@@ -129,7 +126,6 @@ function decideOperation(e) {
 function operation(operator) {
     //Starting a new calculation:
     if (number1 == null && isCalculated == false) {
-        //console.log("11111111")
         number1 = Number(displayValue)
         resultDisplay.textContent = number1 + ` ${chosenOperator} `
         if (chosenOperator == "**") {
@@ -142,14 +138,12 @@ function operation(operator) {
     }
     // check if the chosen operator is different from the previous operator
     else if (number1 != null && number2 == null && displayValue == "" && operator != temp && midCalculated == false) {
-        //console.log("changed")
         temp = operator
         previousOperator = chosenOperator
         nextOperator = chosenOperator
     }
     // Do the next calculation using an operator without pressing the equals button:
     else if (number1 != null && number2 == null && displayValue != "") {
-        //console.log("22222222")
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + ` ${chosenOperator} `
@@ -164,14 +158,12 @@ function operation(operator) {
         nextOperator = chosenOperator
     }
     else if (number1 != null && number2 != null && displayValue == "" && operator != temp && midCalculated == true) {
-        //console.log("changed 2")
         temp = operator
         previousOperator = chosenOperator
         nextOperator = chosenOperator
         midCalculated = false
     }
     else if (number2 != null && displayValue != "") {
-        //console.log("3333333")
         number2 = Number(displayValue)
         operate(number1, operator, number2)
         resultDisplay.textContent = result + ` ${chosenOperator} `
@@ -187,7 +179,6 @@ function operation(operator) {
     }
     // If you calculated & got the result and want to use the result for next calculations:
     else if (isCalculated && displayValue == "") {
-        //console.log("5555555")
         displayValue = ""
         number1 = result
         resultDisplay.textContent = result + ` ${chosenOperator} `
@@ -240,9 +231,9 @@ function decideNumber(e) {
         display.textContent = ""  // Clear the display screen
         override = false
         display.textContent += e.target.textContent
+        
         displayValue += e.target.textContent
         isCalculated = false
-        console.log("A")
     } else if (override && !decimalEnabled) {
         override = false
         display.textContent = ""
@@ -250,12 +241,10 @@ function decideNumber(e) {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
         decimalEnabled = false
-        console.log("B")
     } else {
         display.textContent += e.target.textContent
         displayValue += e.target.textContent
         isCalculated = false
-        console.log("C")
     }
 }
 
@@ -269,6 +258,30 @@ btn3.addEventListener("click", decideNumber)
 btn2.addEventListener("click", decideNumber)
 btn1.addEventListener("click", decideNumber)
 btn0.addEventListener("click", decideNumber)
+
+window.addEventListener("keydown", (e)=> {
+    switch (e.key) {
+        case "9": btn9.click(); break;
+        case "8": btn8.click(); break;
+        case "7": btn7.click(); break;
+        case "6": btn6.click(); break;
+        case "5": btn5.click(); break;
+        case "4": btn4.click(); break;
+        case "3": btn3.click(); break;
+        case "2": btn2.click(); break;
+        case "1": btn1.click(); break;
+        case "0": btn0.click(); break;
+        case "+": btnAdd.click(); break;
+        case "-": btnSubtrack.click(); break;
+        case "*": btnMultiply.click(); break;
+        case "/": btnDivide.click(); break;
+        case "^": btnPw.click(); break;
+        case ".": btnDot.click(); break;
+        case "Backspace": btnDel.click(); break;
+        case "Delete": btnDel.click(); break;
+        case "Enter": btnEquals.click(); break;
+    }
+})
 
 btnDot.addEventListener("click", () => {
     if (decimalEnabled && override && !isCalculated && !display.textContent.includes(".")) {
@@ -328,16 +341,16 @@ btnDel.addEventListener("click", () => {
 })
 
 btnSign.addEventListener("click", () => {
-    if(display.textContent.includes(".")){
+    if (display.textContent.includes(".")) {
         decimalEnabled = true
     }
     if (!signChanged && display.textContent != "") {
-        display.textContent = displayValue*(-1)
-        displayValue = displayValue*(-1)
-        signChanged = true  
-    } else if(signChanged && display.textContent != ""){
-        display.textContent = displayValue*(-1)
-        displayValue = displayValue*(-1)
-        signChanged = false   
+        display.textContent = displayValue * (-1)
+        displayValue = displayValue * (-1)
+        signChanged = true
+    } else if (signChanged && display.textContent != "") {
+        display.textContent = displayValue * (-1)
+        displayValue = displayValue * (-1)
+        signChanged = false
     }
 })
