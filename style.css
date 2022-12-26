@@ -1,3 +1,6 @@
+body {
+    background-color: rgba(255, 245, 240);
+}
 .container {
     display: flex;
     justify-content: center;
@@ -9,50 +12,63 @@
     align-items: center;
     justify-content: flex-start;
     width: 400px;
-    height: 560px;
-    background-color: rgb(189, 189, 189);
+    height: 650px;
+    border: rgb(182, 150, 139) 5px solid;
+    border-radius: 35px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Rubik', sans-serif;
 }
 .screen {
+    border-radius: 10px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 350px;
-    height: 80px;
-    background-color: grey;
+    height: 130px;
+    background-image: linear-gradient(to right, rgb(255, 201, 147), rgb(255, 180, 147));
+    color: white;
     font-size: 50px;
+    font-family: 'Rubik', sans-serif;
     overflow: hidden
 }
 .result {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 25px;
+    margin-top: 20px;
+    margin-bottom: 7px;
+    padding: 5px;
     width: 350px;
-    height: 60px;
-    background-color: rgb(101, 158, 90);
-    font-size: 50px;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(255, 140, 91);
+    font-size: 37px;
+    font-family: 'Rubik', sans-serif;
     overflow: hidden
 }
 
 .buttons {
-    width: 380px;
+    width: 340px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 25px;
-    gap: 15px;
+    margin-bottom: 25px;
+    gap: 12px;
+    color: rgb(84, 49, 39);
 }
 .buttons > div {
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 75px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     font-size: 30px;
-    background-color:rgb(143, 137, 137);
+    border-radius: 50%;
+    background-color:rgb(255, 226, 210);
 }
 
 .buttons > div:hover {
-    background-color:rgb(114, 108, 108) ;
+    background-color:rgb(255, 181, 154) ;
 }
