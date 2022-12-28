@@ -76,6 +76,7 @@ const btnSign = document.querySelector("#btnSign")
 
 let displayValue = display.textContent
 
+let displayOperator = ""
 let previousOperator = ""
 let nextOperator = ""
 let chosenOperator = ""
@@ -103,13 +104,9 @@ function decideOperation(e) {
     decimalEnabled = true
     delEnabled = false
     override = true
-    if (e.target.textContent == "^") { // If you click the btnPW, use its data-text "**" as an operator, but display its text content "^" on the screen.
-        chosenOperator = e.target.getAttribute("data-text")
-        resultDisplay.textContent = number1 + ` ^ `;
-    } else {
-        chosenOperator = e.target.textContent
-        resultDisplay.textContent = number1 + ` ${chosenOperator} `;
-    }
+    chosenOperator = e.target.getAttribute("data-text")
+    displayOperator = e.target.textContent
+    resultDisplay.textContent = number1 + ` ${displayOperator} `;
 
     if (midCalculated == false) {
         temp = chosenOperator;
@@ -127,10 +124,7 @@ function operation(operator) {
     //Starting a new calculation:
     if (number1 == null && isCalculated == false) {
         number1 = Number(displayValue)
-        resultDisplay.textContent = number1 + ` ${chosenOperator} `
-        if (chosenOperator == "**") {
-            resultDisplay.textContent = number1 + ` ^ `
-        }
+        resultDisplay.textContent = number1 + ` ${displayOperator} `
         displayValue = ""
         override = true
         previousOperator = chosenOperator
@@ -146,10 +140,7 @@ function operation(operator) {
     else if (number1 != null && number2 == null && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        if (chosenOperator == "**") {
-            resultDisplay.textContent = result + ` ^ `
-        }
+        resultDisplay.textContent = result + ` ${displayOperator} ` 
         number1 = result
         displayValue = ""
         override = true
@@ -166,10 +157,7 @@ function operation(operator) {
     else if (number2 != null && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        if (chosenOperator == "**") {
-            resultDisplay.textContent = result + ` ^ `
-        }
+        resultDisplay.textContent = result + ` ${displayOperator} `
         number1 = result
         displayValue = ""
         override = true
@@ -181,10 +169,7 @@ function operation(operator) {
     else if (isCalculated && displayValue == "") {
         displayValue = ""
         number1 = result
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        if (chosenOperator == "**") {
-            resultDisplay.textContent = result + ` ^ `
-        }
+        resultDisplay.textContent = result + ` ${displayOperator} `    
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -193,10 +178,7 @@ function operation(operator) {
     else if (isCalculated && displayValue != "") {
         displayValue = ""
         number1 = result
-        resultDisplay.textContent = result + ` ${chosenOperator} `
-        if (chosenOperator == "**") {
-            resultDisplay.textContent = result + ` ^ `
-        }
+        resultDisplay.textContent = result + ` ${displayOperator} `  
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -231,7 +213,7 @@ function decideNumber(e) {
         display.textContent = ""  // Clear the display screen
         override = false
         display.textContent += e.target.textContent
-        
+
         displayValue += e.target.textContent
         isCalculated = false
     } else if (override && !decimalEnabled) {
@@ -259,7 +241,7 @@ btn2.addEventListener("click", decideNumber)
 btn1.addEventListener("click", decideNumber)
 btn0.addEventListener("click", decideNumber)
 
-window.addEventListener("keydown", (e)=> {
+window.addEventListener("keydown", (e) => {
     switch (e.key) {
         case "9": btn9.click(); break;
         case "8": btn8.click(); break;
