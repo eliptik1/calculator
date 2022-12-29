@@ -1,3 +1,9 @@
+html {
+    /* footer fix */
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     margin: 0;
     background-color: rgba(255, 245, 240);
@@ -97,20 +103,6 @@ body {
     background-color: rgb(255, 181, 154);
 }
 
-.footer {
-    height: 50px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    margin-bottom: 30px;
-}
-
-.footer>p {
-    font-size: 19px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif
-}
-
 /* Dark mode */
 .bodyDark {
     background-color: rgb(139, 169, 147);
@@ -198,4 +190,19 @@ body {
 
 .toggle__input:checked~.toggle__fill::after {
     transform: translateX(var(--height))
+}
+
+.footer {
+    height: 50px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.footer>p {
+    font-size: 19px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
 }
