@@ -71,6 +71,7 @@ const btnDot = document.querySelector("#btnDot")
 const btnDel = document.querySelector("#btnDel")
 const btnPw = document.querySelector("#btnPw")
 const btnSign = document.querySelector("#btnSign")
+const modeSwitchBtn = document.querySelector("#mode-switch-btn")
 
 
 
@@ -336,3 +337,22 @@ btnSign.addEventListener("click", () => {
         signChanged = false
     }
 })
+
+modeSwitchBtn.addEventListener("click", toggleDarkMode)
+
+function toggleDarkMode(){
+    const body = document.querySelector("body");
+    const calculator = document.querySelector(".calculator");
+    const screen = document.querySelector(".screen");
+    const result = document.querySelector(".result");
+    const buttons = document.querySelector(".buttons");
+    const operator1 = document.querySelectorAll(".operator");
+
+
+    calculator.classList.toggle("calculatorDark")
+    result.classList.toggle("resultDark")
+    screen.classList.toggle("screenDark")
+    buttons.classList.toggle("buttonsDark")
+    body.classList.toggle("bodyDark")
+    operator1.forEach(node => node.classList.toggle("operatorDark"))
+}
