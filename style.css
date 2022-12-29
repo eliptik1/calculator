@@ -10,6 +10,7 @@ body {
     justify-content: center;
     margin-top: 60px;
 }
+
 .calculator {
     display: flex;
     flex-direction: column;
@@ -21,8 +22,9 @@ body {
     border-radius: 35px;
     background-color: rgb(255, 255, 255);
     font-family: 'Rubik', sans-serif;
-    box-shadow: 0 10px 80px -15px rgba(0,0,0,1);
+    box-shadow: 0 10px 80px -15px rgba(0, 0, 0, 1);
 }
+
 .screen {
     border-radius: 10px;
     display: flex;
@@ -36,6 +38,7 @@ body {
     font-family: 'Rubik', sans-serif;
     overflow: hidden
 }
+
 .result {
     display: flex;
     justify-content: flex-start;
@@ -61,7 +64,8 @@ body {
     gap: 10px;
     color: rgb(120, 91, 83);
 }
-.buttons > div {
+
+.buttons>div {
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -73,70 +77,125 @@ body {
 }
 
 .operator {
-    background-color:rgb(255, 226, 210);
+    background-color: rgb(255, 226, 210);
 }
 
-.buttons > div:hover {
-    background-color:rgb(253, 222, 210);
+.buttons>div:hover {
+    background-color: rgb(253, 222, 210);
 }
-.buttons > div:active {
-    background-color:rgb(253, 222, 210);
+
+.buttons>div:active {
+    background-color: rgb(253, 222, 210);
     transform: scale(0.9);
 }
 
-.buttons > div.operator:hover {
-    background-color:rgb(255, 181, 154);
+.buttons>div.operator:hover {
+    background-color: rgb(255, 181, 154);
 }
-.buttons > div.operator:active {
-    background-color:rgb(255, 181, 154);
+
+.buttons>div.operator:active {
+    background-color: rgb(255, 181, 154);
 }
 
 .footer {
     height: 50px;
     text-align: center;
-    position:fixed;
+    position: fixed;
     width: 100%;
     bottom: 0;
     margin-bottom: 30px;
 }
 
-.footer > p {
+.footer>p {
     font-size: 19px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
 /* Dark mode */
 .bodyDark {
     background-color: rgb(139, 169, 147);
 }
+
 .calculatorDark {
     border: rgb(33, 38, 51) 6px solid;
-    background-color: rgb(46,57,81);
-    box-shadow: 0 10px 80px -15px rgba(0,0,0,1);
+    background-color: rgb(46, 57, 81);
+    box-shadow: 0 10px 80px -15px rgba(0, 0, 0, 1);
 }
+
 .screenDark {
-    background-image: linear-gradient( rgb(36, 38, 42),rgb(36, 43, 59) );
+    background-image: linear-gradient(rgb(36, 38, 42), rgb(36, 43, 59));
     color: rgb(4, 226, 115);
 }
+
 .resultDark {
-    background-color: rgb(46,57,81);
+    background-color: rgb(46, 57, 81);
     color: rgb(4, 226, 115);
 }
+
 .buttonsDark {
-    color: rgb(13,179,135);
+    color: rgb(13, 179, 135);
 }
+
 .operatorDark {
-    background-color:rgb(33,43,65);
+    background-color: rgb(33, 43, 65);
 }
-.buttonsDark > div:hover {
-    background-color:rgb(63, 78, 110);
+
+.buttonsDark>div:hover {
+    background-color: rgb(63, 78, 110);
 }
-.buttonsDark > div:active {
-    background-color:rgb(63, 78, 110);
+
+.buttonsDark>div:active {
+    background-color: rgb(63, 78, 110);
 }
-.buttonsDark > div.operator:hover {
-    background-color:rgb(63, 78, 110);
+
+.buttonsDark>div.operator:hover {
+    background-color: rgb(63, 78, 110);
 }
-.buttonsDark > div.operator:active {
-    background-color:rgb(63, 78, 110);
+
+.buttonsDark>div.operator:active {
+    background-color: rgb(63, 78, 110);
+}
+
+.toggle {
+    margin-top: 10px;
+    --width: 60px;
+    --height: calc(var(--width) / 2);
+    --border-radius: calc(var(--height)/2);
+
+    display: inline-block;
+    cursor: pointer;
+}
+
+.toggle__input {
+    display: none;
+}
+
+.toggle__fill {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    background-color: #dddd;
+    transition: background 0.2s;
+}
+
+.toggle__input:checked~.toggle__fill {
+    background: #009578;
+}
+
+.toggle__fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--height);
+    width: var(--height);
+    background: #ffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: var(--border-radius);
+    transition: transform 0.2s;
+}
+
+.toggle__input:checked~.toggle__fill::after {
+    transform: translateX(var(--height))
 }

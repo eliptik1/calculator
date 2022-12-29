@@ -13,10 +13,13 @@
 
 <body>
     <script src="script.js" defer></script>
-    
+
     <div class="container">
         <div class="calculator">
-            <button id="mode-switch-btn">Change</button>
+            <label class="toggle" for="myToggle">
+                <input class="toggle__input" type="checkbox" id="myToggle">
+                <div class="toggle__fill"></div>
+            </label>
             <div class="result"></div>
             <div class="screen"></div>
             <div class="buttons">
@@ -43,7 +46,10 @@
             </div>
         </div>
     </div>
-    <footer class="footer"> <p> Copyright © 2022 eliptik1 <a href="https://github.com/eliptik1"><i class="fa fa-github" style="font-size:26px; color: rgb(50, 50, 50)"></i></a></p></footer>
+    <footer class="footer">
+        <p> Copyright © 2022 eliptik1 <a href="https://github.com/eliptik1"><i class="fa fa-github"
+                    style="font-size:26px; color: rgb(50, 50, 50)"></i></a></p>
+    </footer>
 </body>
 
 </html>

@@ -71,7 +71,7 @@ const btnDot = document.querySelector("#btnDot")
 const btnDel = document.querySelector("#btnDel")
 const btnPw = document.querySelector("#btnPw")
 const btnSign = document.querySelector("#btnSign")
-const modeSwitchBtn = document.querySelector("#mode-switch-btn")
+const modeSwitchBtn = document.querySelector("#myToggle")
 
 
 
@@ -141,7 +141,7 @@ function operation(operator) {
     else if (number1 != null && number2 == null && displayValue != "") {
         number2 = Number(displayValue)
         operate(number1, operator, number2)
-        resultDisplay.textContent = result + ` ${displayOperator} ` 
+        resultDisplay.textContent = result + ` ${displayOperator} `
         number1 = result
         displayValue = ""
         override = true
@@ -170,7 +170,7 @@ function operation(operator) {
     else if (isCalculated && displayValue == "") {
         displayValue = ""
         number1 = result
-        resultDisplay.textContent = result + ` ${displayOperator} `    
+        resultDisplay.textContent = result + ` ${displayOperator} `
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -179,7 +179,7 @@ function operation(operator) {
     else if (isCalculated && displayValue != "") {
         displayValue = ""
         number1 = result
-        resultDisplay.textContent = result + ` ${displayOperator} `  
+        resultDisplay.textContent = result + ` ${displayOperator} `
         isCalculated = false
         midCalculated = true
         nextOperator = chosenOperator
@@ -340,7 +340,7 @@ btnSign.addEventListener("click", () => {
 
 modeSwitchBtn.addEventListener("click", toggleDarkMode)
 
-function toggleDarkMode(){
+function toggleDarkMode() {
     const body = document.querySelector("body");
     const calculator = document.querySelector(".calculator");
     const screen = document.querySelector(".screen");
