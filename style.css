@@ -32,6 +32,7 @@ body {
 }
 
 .screen {
+    padding-right: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: flex-end;
@@ -66,7 +67,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 14px;
+    margin: 14px;
     gap: 10px;
     color: rgb(120, 91, 83);
 }
